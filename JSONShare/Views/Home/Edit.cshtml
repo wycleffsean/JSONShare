@@ -6,6 +6,12 @@
 
 <h2>Edit</h2>
 
+<pre>Created: @Model.Created</pre>
+<pre>Updated: @Model.Updated</pre>
+<pre>Viewed: @Model.Viewed</pre>
+
+@Model.Created
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)

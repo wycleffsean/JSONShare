@@ -29,6 +29,10 @@ namespace JSONShare.Controllers
                 using (var db = new Database())
                 {
                     item.Json = item.Json.Trim();
+                    //timestamp
+                    item.Created = DateTime.UtcNow;
+                    item.Updated = DateTime.UtcNow;
+
                     db.JsonItems.Add(item);
                     db.SaveChanges();
                     return RedirectToAction("Edit", new { id = item.Id });
@@ -39,8 +43,8 @@ namespace JSONShare.Controllers
 
         //
         // GET: /Home/Edit/5
-        [OutputCache(Duration=60, VaryByParam="id")]
-        public ActionResult Edit(int id)
+        [OutputCache(Duration=60, VaryByParam="id;jsonp;callback")]
+        public ActionResult Edit(int id, string jsonp, string callback)
         {
             using (var db = new Database())
             {
@@ -49,6 +53,16 @@ namespace JSONShare.Controllers
                     var model = db.JsonItems.Find(id);
                     if (model == null)
                         throw new Exception();
+
+                    //timestamp
+                    model.Viewed = DateTime.UtcNow;
+                    db.SaveChanges();
+
+                    if (!(String.IsNullOrEmpty(jsonp) && String.IsNullOrEmpty(callback)))
+                    {
+                        var _jsonp = jsonp ?? callback;
+                        return Content(String.Format("{0}({1})",_jsonp, model.Json));
+                    }
 
                     return View(model);
                 }
@@ -72,10 +86,11 @@ namespace JSONShare.Controllers
                     var model = db.JsonItems.Find(id);
                     model.Json = item.Json;
                     model.Title = item.Title;
+                    model.Updated = DateTime.UtcNow; //timestamp
                     db.SaveChanges();
                     
-                    var url = Url.Action("Edit", new { id = model.Id });
-                    HttpResponse.RemoveOutputCacheItem(url);
+                    var url = Url.Action("Edit", new { id = model.Id });                    
+                    HttpResponse.RemoveOutputCacheItem(url, url);                   
 
                     return View(model);
                 }

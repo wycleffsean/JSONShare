@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace JSONShare.Models
 {
-    public class JsonItem
+    public class JsonItem : ITimestamp
     {
         public int Id { get; set; }
 
@@ -16,5 +16,9 @@ namespace JSONShare.Models
 
         [Required]
         public string Json { get; set; }
+
+        public DateTime? Created { get; set; }
+        public DateTime? Updated { get; set; }
+        public DateTime? Viewed { get; set; }
     }
 }
