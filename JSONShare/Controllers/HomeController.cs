@@ -11,10 +11,12 @@ namespace JSONShare.Controllers
     {
         //
         // GET: /Home/Create
-        [OutputCache(Duration=1800)]
+        //[OutputCache(Duration=1800)]
         public ActionResult Create()
         {
-            var model = new JsonItem();
+            var model = new JsonItem() {
+                Json = string.Empty
+            };
             return View(model);
         }
 
@@ -90,7 +92,7 @@ namespace JSONShare.Controllers
                     db.SaveChanges();
                     
                     var url = Url.Action("Edit", new { id = model.Id });                    
-                    HttpResponse.RemoveOutputCacheItem(url, url);                   
+                    HttpResponse.RemoveOutputCacheItem(url);                   
 
                     return View(model);
                 }

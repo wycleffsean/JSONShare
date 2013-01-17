@@ -1,11 +1,8 @@
 ﻿@model JSONShare.Models.JsonItem
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = string.IsNullOrEmpty(Model.Title) ? "JSON Share" : Model.Title + " - JSON Share";
 }
-
-<h2>Edit</h2>
-
 <pre>Created: @Model.Created</pre>
 <pre>Updated: @Model.Updated</pre>
 <pre>Viewed: @Model.Viewed</pre>

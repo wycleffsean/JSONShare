@@ -1,22 +1,29 @@
 ﻿@model JSONShare.Models.JsonItem
 
-@Html.HiddenFor(model => model.Id)
-
 <script type="text/javascript">
     $(function () {
         var viewModel = {}
-        viewModel.json = ko.observable("@Html.Raw(Model.Json)");
+        viewModel.json = ko.observable("@Html.Raw(Model.Json.Replace("\"","\\\""))");
         viewModel.valid = ko.computed(function () {
             var valid,
                 json = ko.utils.unwrapObservable(viewModel.json);
             try {
-                var obj = eval("[" + json + "]");//JSON.parse(json);
+                var obj = eval("[" + json + "]"); //JSON.parse(json);
                 valid = true;
             }
             catch (e) { valid = false; }
 
             return valid;
         })
+        viewModel.beautified = ko.computed(function () {
+            var result = "";
+            try {
+                var obj = eval("[" + ko.utils.unwrapObservable(viewModel.json) + "]");
+                result = js_beautify(JSON.stringify(obj[0]));
+            }
+            catch (e) { }
+            return result;
+        });
 
         ko.applyBindings(viewModel);
     });
@@ -40,3 +47,5 @@
 </div>
 
 <button data-bind="enable: valid">Save</button>
+
+<pre data-bind="text: beautified"></pre>

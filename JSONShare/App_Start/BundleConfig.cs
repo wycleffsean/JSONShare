@@ -24,7 +24,8 @@ namespace JSONShare
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
-                        "~/Scripts/knockout-*"));
+                        "~/Scripts/knockout-*",
+                        "~/Scripts/beautify.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
