@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONShare", "JSONShare\JSONShare.csproj", "{2E15887F-33E4-4F0F-BB46-ADAB17E2B379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONShare.Tests", "JSONShare.Tests\JSONShare.Tests.csproj", "{05A04FF3-926E-46B4-98F7-6D9F9DF98D22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E15887F-33E4-4F0F-BB46-ADAB17E2B379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E15887F-33E4-4F0F-BB46-ADAB17E2B379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E15887F-33E4-4F0F-BB46-ADAB17E2B379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E15887F-33E4-4F0F-BB46-ADAB17E2B379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A04FF3-926E-46B4-98F7-6D9F9DF98D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A04FF3-926E-46B4-98F7-6D9F9DF98D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A04FF3-926E-46B4-98F7-6D9F9DF98D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A04FF3-926E-46B4-98F7-6D9F9DF98D22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
