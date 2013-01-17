@@ -11,7 +11,7 @@ namespace JSONShare.Controllers
     {
         //
         // GET: /Home/Create
-
+        [OutputCache(Duration=1800)]
         public ActionResult Create()
         {
             var model = new JsonItem();
@@ -39,7 +39,7 @@ namespace JSONShare.Controllers
 
         //
         // GET: /Home/Edit/5
-
+        [OutputCache(Duration=60, VaryByParam="id")]
         public ActionResult Edit(int id)
         {
             using (var db = new Database())
@@ -47,6 +47,9 @@ namespace JSONShare.Controllers
                 try
                 {
                     var model = db.JsonItems.Find(id);
+                    if (model == null)
+                        throw new Exception();
+
                     return View(model);
                 }
                 catch (Exception)
@@ -70,6 +73,9 @@ namespace JSONShare.Controllers
                     model.Json = item.Json;
                     model.Title = item.Title;
                     db.SaveChanges();
+                    
+                    var url = Url.Action("Edit", new { id = model.Id });
+                    HttpResponse.RemoveOutputCacheItem(url);
 
                     return View(model);
                 }
